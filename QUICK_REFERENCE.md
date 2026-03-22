@@ -4,6 +4,37 @@
 
 ---
 
+# ⚠️ СТРОГИЙ СИНТАКСИС УЧПУ "МАЯК-600" (ОБЯЗАТЕЛЕН ДЛЯ ИИ)
+
+**Перед генерацией кода прочитай этот раздел!**
+
+## Правильный синтаксис (только так!)
+
+| Конструкция | Правильно | Неправильно |
+|-------------|-----------|-------------|
+| Форма | `{ form 0 ... } form` | `form 0 ... endform` |
+| Вид | `{ view ... } view` | `view ... endview` |
+| Элемент | `{ item ... }` | `item ...` |
+| Меню | `{ menu 10 { f1 ... } } menu` | `menu 0 ... horizontal` |
+| Условие | `{ if m30=255 ... }` | `if m30=255 ... endif` |
+| Цвет | `bgr = MAIN_BGR` | `bgcolor = black` |
+| Координата | `x = GAP_H` | `x = 10` |
+
+## Пример правильного кода
+
+{ default xmax=800 ymax=600 fgr=MAIN_TEXT bgr=MAIN_BGR } default
+
+{ form 0 (menu=10, xmax=665, ymax=600)
+    { view ()
+        { item # (height=FONTSIZE_MID) GAP_H GAP_V yes yes 'Автомат' }
+        { item m30 (invbgr=Error_C invfgr=MAIN_BGR width=106)
+            111 GAP_V yes yes 'ЧПУ: Авария'
+            { if m30=255 invbgr=GREEN format='ЧПУ: Готово' }
+        }
+    } view
+} form
+
+
 ## 1. HMI — язык разметки интерфейса
 
 ### Базовый синтаксис
