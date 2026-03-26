@@ -394,6 +394,88 @@
 
 ---
 
+## Dlgdata (табличное меню)
+
+Блок `{ dlgdata ... } dlgdata` используется для создания табличных меню выбора. Он отображает список элементов из конфигурационного файла, позволяя оператору выбирать нужный пункт (например, G-код, цикл, геометрический элемент).
+
+### Синтаксис
+{ dlgdata menu=<номер_меню> cfgfile="<имя_файла>" columns=<количество_колонок> }
+или
+{ dlgdata (атрибуты) ... } dlgdata
+
+### Атрибуты
+| Атрибут | Описание | Пример |
+|---------|----------|--------|
+| menu | Номер меню, связанного с данным dlgdata | `menu=10000` |
+| cfgfile | Имя файла конфигурации, содержащего список элементов | `cfgfile="ciklt.dat"` |
+| columns | Количество колонок в таблице | `columns=1` |
+
+### Использование
+
+`dlgdata` обычно размещается внутри блока `grid` и комбинируется с обработчиком нажатия клавиши Enter:
+
+{ grid g_dlgdata_1 ()
+    { hotkey KEY_ENTER { pressed dataselect inpush "<?fun>" vvod_all } }
+    { dlgdata menu=10000 cfgfile="ciklt.dat" columns=1 }
+    { view (xmax=800 ymax=600 windowed=1 grid_y=0 grid_h=DEF_GRID_Y grid_selectable=0 bgr = BG_MAIN )
+        { item # (height=FONTSIZE_MID ratio=0.5 invfgr=BG_MAIN invbgr=TEXT_MAIN)
+            0 GAP_V yes yes ' Диалог: ввод цикла ' }
+    } view
+} grid
+
+### Принцип работы
+
+1. Конфигурационный файл (например, `ciklt.dat`) содержит список элементов, доступных для выбора
+2. `dlgdata` отображает эти элементы в виде таблицы
+3. Пользователь выбирает элемент с помощью курсора и нажимает Enter
+4. Команда `dataselect` обрабатывает выбор, извлекает выбранный элемент и передает его в действие `vvod_all` (или другое) для дальнейшей обработки
+
+### Пример с несколькими dlgdata для разных типов элементов
+
+В реальных проектах часто создают несколько гридов с разными `dlgdata` для разных категорий:
+
+; Для циклов
+{ grid g_dlgdata_1 ()
+    { hotkey KEY_ENTER { pressed dataselect inpush "<?fun>" vvod_all } }
+    { dlgdata menu=10000 cfgfile="ciklt.dat" columns=1 }
+    { view ... }
+} grid
+
+; Для G-функций
+{ grid g_dlgdata_2 ()
+    { hotkey KEY_ENTER { pressed dataselect inpush "<?fun>" vvod_all } }
+    { dlgdata menu=10000 cfgfile="ciklt.dat" columns=1 }
+    { view ... }
+} grid
+
+; Для измерительных циклов
+{ grid g_dlgdata_3 ()
+    { hotkey KEY_ENTER { pressed dataselect inpush "<?fun>" vvod_all } }
+    { dlgdata menu=10000 cfgfile="ciklt.dat" columns=1 }
+    { view ... }
+} grid
+
+; Для геометрических элементов
+{ grid g_dlgdata_4 ()
+    { hotkey KEY_ENTER { pressed dataselect inpush "<?fun>" vvod_all } }
+    { dlgdata menu=10000 cfgfile="ciklt.dat" columns=1 }
+    { view ... }
+} grid
+
+### Связь с меню
+
+Меню для `dlgdata` обычно содержит кнопки выбора, возврата и может выглядеть так:
+
+{ menu 10000
+    { f1 { text "Выбор" } { pressed dataselect inpush "<?fun>" vvod_all } }
+    { f6 { text "Возврат" } { pressed quit } }
+    { f7 { text " " } }
+    { Ctrlf6 { text "Возврат" } { pressed quit } }
+    { f15 { text "Возврат" } { pressed quit } }
+} menu
+
+---
+
 ## Специальные элементы
 
 Элементы, которые можно использовать как имя item для вывода системной информации:
