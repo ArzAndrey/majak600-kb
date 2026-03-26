@@ -1,0 +1,59 @@
+; --- Зона S ---
+{ box  color=B6 x=BOX_X y=BOX_S_Y  x2=BOX_W y2=BOX_S_H+35   }
+{ item #  (fgr=B3 bgr=B6)
+   BOX_X+BOX_GAP_H  BOX_S_Y+BOX_GAP_V   no   yes    'S'     }
+
+; S заданное
+{ item  p1  (fgr=B1 bgr=B6 width=50 align=left)
+   BOX_X+BOX_GAP_H+28  BOX_S_Y+BOX_GAP_V   no   yes    '[5]'
+   { if i56=1 format='     &p0[3]' } }
+; Единицы измерения
+{ item #  (height=FONTSIZE_SMALL fgr=B3 bgr=B6 align=TEXT_RIGHT width=45)
+   BOX_X+BOX_GAP_H+80  BOX_S_Y+BOX_GAP_V   no   yes    ' об/мин '
+   { if i56=1 bgr=B6 format=' м/мин ' } }
+
+; S фактическое
+{ item d77  (fgr=B3 bgr=B6 width=50 align=left)
+   BOX_X+BOX_GAP_H+28 BOX_S_Y+BOX_GAP_V+HEIGHT_MID-1   no   yes  '[5]'
+   { if (i56=1)&&(u294=1) bgr=B6 format='     &((m1.0-m6.0)*i34)/159159[3]' }
+   { if (i56=1)&&(u294=0) bgr=B6 format='     &((m1.0-m6.0)/159159)*d77[3]' } }
+
+; S фактическое в об/мин, при i56=1
+{ item d77 (fgr=B3 bgr=B6 width=50)
+   BOX_X+BOX_GAP_H+28  BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2   no   yes    ' '
+   { if (i56=1)&&(u294=0) format='[5]' }
+   { if (i56=1)&&(u294=1) format='&i34[5]' } }
+; Единицы измерения
+{ item # (height=FONTSIZE_SMALL fgr=B3 bgr=B6 align=TEXT_RIGHT width=45)
+   BOX_X+BOX_GAP_H+80  BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2   no   yes    ' об/мин '
+   { if i56=0 bgr=B6 format=' ' } }
+
+; %S
+{ item d62  (height=FONTSIZE_SMALL fgr=B1 bgr=B6 invfgr=B1 invbgr=B5 width=33)
+   BOX_X+BOX_GAP_H+80+10  BOX_S_Y+BOX_GAP_V+HEIGHT_MID+1.5  no  yes  '[3]%' +ps1 -ps2 !"<ust>PS"#"<ust>" }
+
+; Дополнительный шпиндель SA
+{ item # (fgr=B1 bgr=B6)
+   BOX_X+BOX_GAP_H BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2+1+17 no yes 'SA' }
+
+; SA заданное
+{ item d112 (fgr=B1 bgr=B6 width=50 align=left)
+   BOX_X+BOX_GAP_H+28 BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2+1+17 no yes '[5]' }
+
+; SA фактическое
+{ item # (fgr=B3 bgr=B6 width=50 align=left)
+   BOX_X+BOX_GAP_H+28 BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2+1+34.5 no yes '[5]' }
+
+; Единицы измерения
+{ item # (height=FONTSIZE_SMALL fgr=B3 bgr=B6 align=TEXT_RIGHT width=45)
+   BOX_X+BOX_GAP_H+80 BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2+1+17 no yes ' об/мин '}
+
+; %SA
+{ item d62  (height=FONTSIZE_SMALL fgr=B1 bgr=B6 invfgr=B1 invbgr=B5 width=33)
+   BOX_X+BOX_GAP_H+80+10  BOX_S_Y+BOX_GAP_V+HEIGHT_MID+54  no  yes  '[3]%' +ps1 -ps2 !"<ust>PS"#"<ust>" }
+
+; Диапазон
+{ item #  (height=26 fgr=B3 bgr=B6 fonts='Mayak-Icons')
+    BOX_X+BOX_GAP_H-2  BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2-0.5-3   no   yes    't'     }
+{ item d70  (height=15 fgr=B1 bgr=B6 fonts='Mayak-Icons' width=10)
+   BOX_X+BOX_GAP_H+0.5  BOX_S_Y+BOX_GAP_V+HEIGHT_MID*2-0.5+5   no   yes    '[1]'     }
