@@ -1,0 +1,111 @@
+;----------------------------------------------------------
+;  Assembling  : D.001.000
+;  Source      : box_SR_avt.dat
+;  Created     : 19.04.2025
+;  Modified    : Arzamastsev Andrey
+;  Author      : ООО "Ижпрэст"
+;----------------------------------------------------------
+
+;**********************************************************
+;**	     Элемент "Значения "Станок","Рассогласование" 	 **
+;**				  осей и шпинделя(с признаками выхода 	 **
+;**				  в ноль или в точку) для режима 		 **
+;**				  "Автомат""     						 **
+;**********************************************************
+
+;Параметры box_SR_avt.dat(Значения "Станок","Рассогласование" осей и шпинделя(с признаками выхода в ноль или в точку) для режима "Автомат"):
+;	#BOX_SR_AVT_X							=		;Координата нулевой точки элемента по Х 
+;	#BOX_SR_AVT_ST_X						=		;Координата нулевой точки столбца "Станок" по Х 
+;	#BOX_SR_AVT_RSG_X						=		;Координата нулевой точки столбца "Рассогласование" по Х 
+;	#BOX_SR_AVT_Y							=		;Координата нулевой точки элемента по Y	
+;	#BOX_SR_AVT_HEIGHT_NAME_LINE			=	 	;Высота наименований строк в таблице 
+;	#BOX_SR_AVT_HEIGHT_NAME_COLUMN			=	 	;Высота наименований столбцов в таблице 
+;	#BOX_SR_AVT_HEIGHT_MEAN					=	 	;Высота значений в таблице !!!(не более BOX_SR_AVT_HEIGHT_NAME_LINE)
+;	#BOX_SR_AVT_NAME_WIDTH					=		;Ширина столбца "Названия осей" !!!(количество символов в наименовании + символ(*/=)) 
+;	#BOX_SR_AVT_ST_WIDTH					=		;Ширина столбца "Станок" 
+;	#BOX_SR_AVT_RSG_WIDTH					=	 	;Ширина столбца "Рассогласование"
+;	#BOX_SR_AVT_STEP						=		;Шаг строк в таблице !!!(не менее BOX_SR_AVT_HEIGHT_NAME_LINE)
+;	#BOX_SR_AVT_FGR							=		;Цвет текста наименования строк
+;	#BOX_SR_AVT_FGR_MEAN					=		;Цвет текста значений
+
+
+;----------------------------------------------------------
+;-Названия координат(осей)---------------------------------
+;----------------------------------------------------------
+
+; Названия координат(осей)
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH  align=LEFT+BOTTOM  fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN  no  yes  '&0'   
+	{ if IND_KRD0#1 
+		format=''
+	} 
+}
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH align=LEFT+BOTTOM   fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP  no  yes  '&1'   
+	{ if IND_KRD1#1 
+		format='' 
+	} 
+}
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH  align=LEFT+BOTTOM   fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*2  no  yes  '&2'   
+	{ if IND_KRD2#1 
+		format=''
+	} 
+}
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH  align=LEFT+BOTTOM   fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*3  no  yes  '&3'   
+	{ if IND_KRD3#1 
+		format='' 
+	} 
+}
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH  align=LEFT+BOTTOM   fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*4  no  yes  '&4'   
+	{ if IND_KRD4#1 
+		format=''
+	} 
+}
+{ item m32.0 (height=BOX_SR_AVT_HEIGHT_NAME_LINE  fgr=BOX_SR_AVT_FGR  width=BOX_SR_AVT_NAME_WIDTH  align=LEFT+BOTTOM   fonts='IBMPlexMono')
+	BOX_SR_AVT_X  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_LINE)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*5  no  yes  '&5'   
+	{ if IND_KRD5#1 
+		format=''
+	} 
+}		
+
+; Символы * и = слева от имени координат(осей)
+{ item # (height=BOX_SR_AVT_HEIGHT_NAME_COLUMN  fgr=BOX_SR_AVT_FGR  align=RIGHT+BOTTOM  fonts='IBMPlexMono')
+	BOX_SR_AVT_X-BOX_SR_AVT_NAME_WIDTH*0.5  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_COLUMN)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN  no  yes  '' 
+	{ if (m0=6)&&(IND_KRD0=1)&&(p10&1#0)  
+		format='=' 
+	} 
+	{ if (m0#6)&&(IND_KRD0=1)&&(p11&1#0)  
+		format='*' 
+	}  
+}
+{ item # (height=BOX_SR_AVT_HEIGHT_NAME_COLUMN  fgr=BOX_SR_AVT_FGR  align=RIGHT+BOTTOM  fonts='IBMPlexMono')
+	BOX_SR_AVT_X-BOX_SR_AVT_NAME_WIDTH*0.5  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_COLUMN)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP  no  yes  '' 
+	{ if (m0=6)&&(IND_KRD1=1)&&(p10&2#0)  
+		format='=' 
+	}
+	{ if (m0#6)&&(IND_KRD1=1)&&(p11&2#0)  
+		format='*' 
+	}  
+}	
+{ item # (height=BOX_SR_AVT_HEIGHT_NAME_COLUMN  fgr=BOX_SR_AVT_FGR  align=RIGHT+BOTTOM  fonts='IBMPlexMono')
+	BOX_SR_AVT_X-BOX_SR_AVT_NAME_WIDTH*0.5  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_COLUMN)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*2  no  yes  '' 
+	{ if (m0=6)&&(IND_KRD2=1)&&(p10&4#0)  
+		format='='  
+	}
+	{ if (m0#6)&&(IND_KRD2=1)&&(p11&4#0)  
+		format='*'
+	} 
+}	
+{ item # (height=BOX_SR_AVT_HEIGHT_NAME_COLUMN  fgr=BOX_SR_AVT_FGR  align=RIGHT+BOTTOM  fonts='IBMPlexMono')
+	BOX_SR_AVT_X-BOX_SR_AVT_NAME_WIDTH*0.5  BOX_SR_AVT_Y+(BOX_SR_AVT_HEIGHT_MEAN-BOX_SR_AVT_HEIGHT_NAME_COLUMN)*0.5+BOX_SR_AVT_HEIGHT_NAME_COLUMN+BOX_SR_AVT_STEP*3   no  yes  '' 
+	{ if (m0=6)&&(IND_KRD3=1)&&(p10&8#0)  
+		format='='  
+	} 
+	{ if (m0#6)&&(IND_KRD3=1)&&(p11&8#0)  
+		format='*' 
+	} 
+}	
+{ item # (height=BOX_SR_AVT_HEIGHT_NAME_COLUMN  fgr=BOX_SR_AVT_FGR  align=RIGHT+B
