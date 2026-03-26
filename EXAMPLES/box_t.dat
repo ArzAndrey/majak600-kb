@@ -1,0 +1,62 @@
+;----------------------------------------------------------
+;  Assembling  : E.001.000
+;  Source      : box_t.dat
+;  Created     : 03.12.2025
+;  Modified    : Arzamastsev Andrey
+;  Author      : АО "Купол-ПРО"
+;----------------------------------------------------------
+
+;**********************************************************
+;**	  Элемент "Зона T"  		                         **
+;**********************************************************
+
+;Параметры box_t.dat(Зона T):
+;   #BOX_T_X					=		;Координата нулевой точки элемента по Х
+; 	#BOX_T_Y					= 		;Координата нулевой точки элемента по Y	
+;	#BOX_T_GAP_HR				= 		;Отступ по горизонтали	
+;	#BOX_T_GAP_VR				= 		;Отступ по вертикали
+;	#BOX_T_HEIGHT				= 		;Высота строки
+;	#BOX_T_STEP		  			= 		;Шаг установки строк по вертикали !!!(не менее BOX_T_HEIGHT)
+;	#BOX_T_W					= 		;Ширина элемента !!!(не менее BOX_T_GAP_HR+116)
+;	#BOX_T_H					=  		;Высота элемента !!!(не менее BOX_T_GAP_VR*2+BOX_T_STEP*2)
+;	#BOX_T_FGR					= 		;Цвет текста 
+;	#BOX_T_FGR2					= 		;Цвет текста 
+;	#BOX_T_BGR					= 		;Цвет фона 
+
+; Заливка области вывода
+{ box  color=BOX_T_BGR x=BOX_T_X y=BOX_T_Y  x2=BOX_T_W y2=BOX_T_H   
+}
+
+; Текст "Маг./РГ"
+{ item #  (height=BOX_T_HEIGHT  bgr=BOX_T_BGR  fgr=BOX_T_FGR)
+	BOX_T_X+BOX_T_GAP_HR  BOX_T_Y+BOX_T_GAP_VR  no  yes  'Маг.'
+	{ if u195#0 
+		format='РГ' 
+	} 
+}
+
+; Текст "T"
+{ item #  (height=BOX_T_HEIGHT  bgr=BOX_T_BGR  fgr=BOX_T_FGR)
+	BOX_T_X+BOX_T_GAP_HR+65  BOX_T_Y+BOX_T_GAP_VR  no  yes  'T'  
+}
+
+; Номер инструмента в магазине
+{ item d75  (height=BOX_T_HEIGHT  bgr=BOX_T_BGR  fgr=BOX_T_FGR2  width=28)
+	BOX_T_X+BOX_T_GAP_HR  BOX_T_Y+BOX_T_GAP_VR+BOX_T_STEP  no  yes  '[2]' 
+}
+
+; T фактический
+{ item p2  (height=BOX_T_HEIGHT  bgr=BOX_T_BGR  fgr=BOX_T_FGR2  width=28)
+	BOX_T_X+BOX_T_GAP_HR+65  BOX_T_Y+BOX_T_GAP_VR+BOX_T_STEP  no  yes  '[2]'
+	{ if p7=1 
+		format='&p8[2]'
+	}       
+} 
+
+; Номер привязки
+{ item p30 (height=BOX_T_HEIGHT  bgr=BOX_T_BGR  fgr=BOX_T_FGR2  width=28)
+	BOX_T_X+BOX_T_GAP_HR+60+30  BOX_T_Y+BOX_T_GAP_VR+BOX_T_STEP  no   yes  '[2]'
+	{ if ((p7=0)&&(p30=p2))||((p7=1)&&(p30=p8)) 
+		format=' ' 
+	}  
+}
