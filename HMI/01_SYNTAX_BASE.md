@@ -152,7 +152,11 @@ bgr = RGB(0, 40, 108)
     height = FONTSIZE_MID
     fgr = MAIN_TEXT
     bgr = MAIN_BGR
+    invfgr = MAIN_BGR
+    invbgr = TEXT_MAIN
     align = TEXT_LEFT
+    windowed = 0
+    ratio = 0.5
 } default
 
 **Параметры, которые можно задать в default:**
@@ -163,9 +167,11 @@ bgr = RGB(0, 40, 108)
 | height | Высота шрифта (пиксели) |
 | fgr | Цвет текста |
 | bgr | Цвет фона |
-| invfgr | Цвет текста в инверсии |
-| invbgr | Цвет фона в инверсии |
+| invfgr | Цвет текста при инверсии |
+| invbgr | Цвет фона при инверсии |
 | align | Выравнивание (TEXT_LEFT, TEXT_RIGHT, TEXT_CENTERED) |
+| windowed | 1 — координаты от всего экрана, 0 — от доступной области |
+| ratio | Коэффициент сжатия шрифта (0.3 — 1.0) |
 | border | Цвет рамки |
 | fonts | Название гарнитуры |
 
