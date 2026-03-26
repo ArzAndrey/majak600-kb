@@ -1,0 +1,65 @@
+;----------------------------------------------------------
+;  Assembling  : E.001.000
+;  Source      : box_r.dat
+;  Created     : 03.12.2025
+;  Modified    : Arzamastsev Andrey
+;  Author      : АО "Купол-ПРО"
+;----------------------------------------------------------
+
+;**********************************************************
+;**	            Элемент "Зона БХ"  		                 **
+;**********************************************************
+
+;Константы box_r.dat(Зона БХ):
+;   #BOX_R_X					=		;Координата нулевой точки элемента по Х
+;	#BOX_R_Y					= 		;Координата нулевой точки элемента по Y	
+;	#BOX_R_GAP_HR				= 		;Отступ по горизонтали	
+;	#BOX_R_GAP_VR				= 		;Отступ по вертикали
+;	#BOX_R_HEIGHT				= 		;Высота строки 
+;	#BOX_R_W					= 		;Ширина элемента !!!(не менее BOX_R_GAP_HR+122)
+;	#BOX_R_H					=  		;Высота элемента !!!(не менее BOX_R_GAP_HR*2+BOX_R_HEIGHT)
+;	#BOX_R_FGR					= 		;Цвет текста 
+;	#BOX_R_FGR2					= 		;Цвет текста (проценты)
+;	#BOX_R_BGR					= 		;Цвет фона 
+;	#BOX_R_BGR2					= 		;Цвет фона текста при выделении (проценты)
+
+; Заливка области вывода
+{ box  
+	color	=BOX_R_BGR  
+	x		=BOX_R_X  
+	y		=BOX_R_Y  
+	x2		=BOX_R_W  
+	y2		=BOX_R_H   
+}	
+
+; Текст "БХ"
+{ item #  (
+	height	=BOX_R_HEIGHT  
+	bgr		=BOX_R_BGR  
+	fgr		=BOX_R_FGR 
+	)
+	BOX_R_X+BOX_R_GAP_HR  
+	BOX_R_Y+BOX_R_GAP_VR  
+	no  
+	yes   
+	'БХ'    
+}		
+
+; %БХ
+{ item d33  (
+	height	=BOX_R_HEIGHT 
+	bgr		=BOX_R_BGR  
+	fgr		=BOX_R_FGR2  
+	invbgr	=BOX_R_BGR2 
+	invfgr	=BOX_R_FGR2 
+	width	=46
+	)
+	BOX_R_X+BOX_R_GAP_HR+76  
+	BOX_R_Y+BOX_R_GAP_VR  
+	no 
+	yes
+	'[3]%' 
+	+bh1 
+	-bh2  
+	!"<ust>PBH"#"<ust>"
+}
